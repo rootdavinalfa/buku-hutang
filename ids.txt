@@ -1,0 +1,8 @@
+Program ini otomatis mebuatkan ID
+Dengan Format
+
+ABBCCDDDD
+A = Kode ID = P = Peminjam , H= idHutang C= Cicilan
+BB = 2 Digit Terakhir tahun
+CC = Bulan dalam format angka 2 digit
+DDDD = Random number generator
