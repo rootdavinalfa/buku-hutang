@@ -5,8 +5,8 @@
             Dim saveOption = "UPDATE vault SET vault.interest = @1, vault.extraInterest = @2"
             Dim ole As OleDb.OleDbCommand = con.CreateCommand
             ole.CommandText = saveOption
-            ole.Parameters.Add(New OleDb.OleDbParameter("@1", Convert.ToInt32(inputBungaAwal.Text)))
-            ole.Parameters.Add(New OleDb.OleDbParameter("@2", Convert.ToInt32(inputPertumbuhanBunga.Text)))
+            ole.Parameters.Add(New OleDb.OleDbParameter("@1", Convert.ToDouble(inputBungaAwal.Text)))
+            ole.Parameters.Add(New OleDb.OleDbParameter("@2", Convert.ToDouble(inputPertumbuhanBunga.Text)))
             If ole.ExecuteNonQuery() Then
                 MsgBox("Update Successfully!")
             End If

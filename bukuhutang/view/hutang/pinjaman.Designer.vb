@@ -24,38 +24,44 @@ Partial Class pinjaman
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.btnBuatHutang = New System.Windows.Forms.Button()
+        Me.inputSaldo = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.lblNama = New System.Windows.Forms.Label()
+        Me.inputTarget = New System.Windows.Forms.DateTimePicker()
+        Me.inputNote = New System.Windows.Forms.TextBox()
+        Me.inputNominal = New System.Windows.Forms.TextBox()
+        Me.inputKTPID = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.dgvDataHutang = New System.Windows.Forms.DataGridView()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cbFind = New System.Windows.Forms.CheckBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.btnShow = New System.Windows.Forms.Button()
+        Me.inputIDHPminjam = New System.Windows.Forms.TextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnDelete = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        CType(Me.dgvDataHutang, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
         '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
@@ -65,12 +71,15 @@ Partial Class pinjaman
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.Label6)
+        Me.TabPage1.Controls.Add(Me.btnBuatHutang)
+        Me.TabPage1.Controls.Add(Me.inputSaldo)
         Me.TabPage1.Controls.Add(Me.Label5)
-        Me.TabPage1.Controls.Add(Me.DateTimePicker1)
-        Me.TabPage1.Controls.Add(Me.TextBox3)
-        Me.TabPage1.Controls.Add(Me.TextBox2)
-        Me.TabPage1.Controls.Add(Me.TextBox1)
+        Me.TabPage1.Controls.Add(Me.Label6)
+        Me.TabPage1.Controls.Add(Me.lblNama)
+        Me.TabPage1.Controls.Add(Me.inputTarget)
+        Me.TabPage1.Controls.Add(Me.inputNote)
+        Me.TabPage1.Controls.Add(Me.inputNominal)
+        Me.TabPage1.Controls.Add(Me.inputKTPID)
         Me.TabPage1.Controls.Add(Me.Label4)
         Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Controls.Add(Me.Label2)
@@ -83,94 +92,31 @@ Partial Class pinjaman
         Me.TabPage1.Text = "Buat Hutang Baru"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'TabPage2
+        'btnBuatHutang
         '
-        Me.TabPage2.Controls.Add(Me.DataGridView1)
-        Me.TabPage2.Controls.Add(Me.GroupBox2)
-        Me.TabPage2.Controls.Add(Me.GroupBox1)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(778, 400)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Data Hutang"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.btnBuatHutang.Location = New System.Drawing.Point(141, 322)
+        Me.btnBuatHutang.Name = "btnBuatHutang"
+        Me.btnBuatHutang.Size = New System.Drawing.Size(75, 23)
+        Me.btnBuatHutang.TabIndex = 12
+        Me.btnBuatHutang.Text = "Buat Hutang"
+        Me.btnBuatHutang.UseVisualStyleBackColor = True
         '
-        'Label1
+        'inputSaldo
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 13)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(115, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "No KTP / ID Peminjam"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 98)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(110, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Target Tanggal Bayar"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 138)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(45, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Nominal"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 175)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(30, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Note"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(141, 13)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(266, 20)
-        Me.TextBox1.TabIndex = 4
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(141, 135)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(266, 20)
-        Me.TextBox2.TabIndex = 5
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(141, 175)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(266, 96)
-        Me.TextBox3.TabIndex = 6
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(141, 98)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(266, 20)
-        Me.DateTimePicker1.TabIndex = 7
+        Me.inputSaldo.Enabled = False
+        Me.inputSaldo.Location = New System.Drawing.Point(141, 141)
+        Me.inputSaldo.Name = "inputSaldo"
+        Me.inputSaldo.Size = New System.Drawing.Size(266, 20)
+        Me.inputSaldo.TabIndex = 11
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.Red
-        Me.Label5.Location = New System.Drawing.Point(137, 48)
+        Me.Label5.Location = New System.Drawing.Point(6, 144)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(97, 24)
-        Me.Label5.TabIndex = 8
-        Me.Label5.Text = "Alexander"
+        Me.Label5.Size = New System.Drawing.Size(71, 13)
+        Me.Label5.TabIndex = 10
+        Me.Label5.Text = "Saldo Tersisa"
         '
         'Label6
         '
@@ -181,100 +127,187 @@ Partial Class pinjaman
         Me.Label6.TabIndex = 9
         Me.Label6.Text = "Nama"
         '
-        'GroupBox1
+        'lblNama
         '
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Controls.Add(Me.Button1)
-        Me.GroupBox1.Location = New System.Drawing.Point(7, 7)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(196, 74)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Action"
+        Me.lblNama.AutoSize = True
+        Me.lblNama.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblNama.ForeColor = System.Drawing.Color.Red
+        Me.lblNama.Location = New System.Drawing.Point(137, 48)
+        Me.lblNama.Name = "lblNama"
+        Me.lblNama.Size = New System.Drawing.Size(21, 24)
+        Me.lblNama.TabIndex = 8
+        Me.lblNama.Text = """'"
         '
-        'Button1
+        'inputTarget
         '
-        Me.Button1.Location = New System.Drawing.Point(96, 32)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Delete"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.inputTarget.Location = New System.Drawing.Point(141, 98)
+        Me.inputTarget.Name = "inputTarget"
+        Me.inputTarget.Size = New System.Drawing.Size(266, 20)
+        Me.inputTarget.TabIndex = 7
         '
-        'Button2
+        'inputNote
         '
-        Me.Button2.Location = New System.Drawing.Point(6, 32)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Update"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.inputNote.Location = New System.Drawing.Point(141, 220)
+        Me.inputNote.Name = "inputNote"
+        Me.inputNote.Size = New System.Drawing.Size(266, 20)
+        Me.inputNote.TabIndex = 6
         '
-        'Button3
+        'inputNominal
         '
-        Me.Button3.Location = New System.Drawing.Point(481, 45)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Find"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.inputNominal.Location = New System.Drawing.Point(141, 180)
+        Me.inputNominal.Name = "inputNominal"
+        Me.inputNominal.Size = New System.Drawing.Size(266, 20)
+        Me.inputNominal.TabIndex = 5
         '
-        'TextBox4
+        'inputKTPID
         '
-        Me.TextBox4.Location = New System.Drawing.Point(201, 47)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(274, 20)
-        Me.TextBox4.TabIndex = 3
+        Me.inputKTPID.Location = New System.Drawing.Point(141, 13)
+        Me.inputKTPID.Name = "inputKTPID"
+        Me.inputKTPID.Size = New System.Drawing.Size(266, 20)
+        Me.inputKTPID.TabIndex = 4
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(6, 220)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(30, 13)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "Note"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(6, 183)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(45, 13)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Nominal"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(6, 98)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(110, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Target Tanggal Bayar"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(6, 13)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(115, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "No KTP / ID Peminjam"
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(778, 400)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Bayar Hutang"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.dgvDataHutang)
+        Me.TabPage2.Controls.Add(Me.GroupBox2)
+        Me.TabPage2.Controls.Add(Me.GroupBox1)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(778, 400)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Data Hutang"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'dgvDataHutang
+        '
+        Me.dgvDataHutang.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvDataHutang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvDataHutang.Location = New System.Drawing.Point(7, 88)
+        Me.dgvDataHutang.Name = "dgvDataHutang"
+        Me.dgvDataHutang.Size = New System.Drawing.Size(765, 306)
+        Me.dgvDataHutang.TabIndex = 5
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.CheckBox1)
-        Me.GroupBox2.Controls.Add(Me.Button4)
+        Me.GroupBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.cbFind)
         Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.Button3)
-        Me.GroupBox2.Controls.Add(Me.TextBox4)
-        Me.GroupBox2.Location = New System.Drawing.Point(210, 7)
+        Me.GroupBox2.Controls.Add(Me.btnShow)
+        Me.GroupBox2.Controls.Add(Me.inputIDHPminjam)
+        Me.GroupBox2.Location = New System.Drawing.Point(116, 7)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(562, 74)
+        Me.GroupBox2.Size = New System.Drawing.Size(656, 74)
         Me.GroupBox2.TabIndex = 4
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Table"
+        '
+        'cbFind
+        '
+        Me.cbFind.AutoSize = True
+        Me.cbFind.Location = New System.Drawing.Point(10, 20)
+        Me.cbFind.Name = "cbFind"
+        Me.cbFind.Size = New System.Drawing.Size(70, 17)
+        Me.cbFind.TabIndex = 6
+        Me.cbFind.Text = "Cari Data"
+        Me.cbFind.UseVisualStyleBackColor = True
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(7, 48)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(179, 13)
+        Me.Label7.Size = New System.Drawing.Size(208, 13)
         Me.Label7.TabIndex = 4
-        Me.Label7.Text = "Cari Data (ID Hutang / ID Peminjam)"
+        Me.Label7.Text = "Cari Data (ID Hutang / ID Peminjam /KTP)"
         '
-        'DataGridView1
+        'btnShow
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(7, 88)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(765, 306)
-        Me.DataGridView1.TabIndex = 5
+        Me.btnShow.Location = New System.Drawing.Point(575, 20)
+        Me.btnShow.Name = "btnShow"
+        Me.btnShow.Size = New System.Drawing.Size(75, 23)
+        Me.btnShow.TabIndex = 2
+        Me.btnShow.Text = "Find"
+        Me.btnShow.UseVisualStyleBackColor = True
         '
-        'Button4
+        'inputIDHPminjam
         '
-        Me.Button4.Location = New System.Drawing.Point(465, 18)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(91, 23)
-        Me.Button4.TabIndex = 5
-        Me.Button4.Text = "Refresh Table"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.inputIDHPminjam.Location = New System.Drawing.Point(221, 45)
+        Me.inputIDHPminjam.Name = "inputIDHPminjam"
+        Me.inputIDHPminjam.Size = New System.Drawing.Size(294, 20)
+        Me.inputIDHPminjam.TabIndex = 3
         '
-        'CheckBox1
+        'GroupBox1
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(10, 20)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(70, 17)
-        Me.CheckBox1.TabIndex = 6
-        Me.CheckBox1.Text = "Cari Data"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.btnDelete)
+        Me.GroupBox1.Location = New System.Drawing.Point(7, 7)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(103, 74)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Action"
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(6, 20)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 0
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
         'pinjaman
         '
@@ -288,10 +321,10 @@ Partial Class pinjaman
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
+        CType(Me.dgvDataHutang, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -303,20 +336,22 @@ Partial Class pinjaman
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents Label5 As Label
+    Friend WithEvents inputNote As TextBox
+    Friend WithEvents inputNominal As TextBox
+    Friend WithEvents inputKTPID As TextBox
+    Friend WithEvents inputTarget As DateTimePicker
+    Friend WithEvents lblNama As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnShow As Button
+    Friend WithEvents inputIDHPminjam As TextBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Button4 As Button
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents dgvDataHutang As DataGridView
+    Friend WithEvents cbFind As CheckBox
+    Friend WithEvents inputSaldo As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents btnBuatHutang As Button
+    Friend WithEvents TabPage3 As TabPage
 End Class

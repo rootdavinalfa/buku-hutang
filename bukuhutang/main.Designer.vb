@@ -22,17 +22,16 @@ Partial Class main
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MasterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BuatDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PeminjamToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SettingBungaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HutangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HutangBaruToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SettingBungaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReviewHutangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lbl_total_dpinjam = New System.Windows.Forms.Label()
         Me.label_perkiraan = New System.Windows.Forms.Label()
@@ -68,18 +67,24 @@ Partial Class main
         '
         Me.BuatDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PeminjamToolStripMenuItem})
         Me.BuatDataToolStripMenuItem.Name = "BuatDataToolStripMenuItem"
-        Me.BuatDataToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BuatDataToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.BuatDataToolStripMenuItem.Text = "Buat Data"
         '
         'PeminjamToolStripMenuItem
         '
         Me.PeminjamToolStripMenuItem.Name = "PeminjamToolStripMenuItem"
-        Me.PeminjamToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PeminjamToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.PeminjamToolStripMenuItem.Text = "Peminjam"
+        '
+        'SettingBungaToolStripMenuItem
+        '
+        Me.SettingBungaToolStripMenuItem.Name = "SettingBungaToolStripMenuItem"
+        Me.SettingBungaToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.SettingBungaToolStripMenuItem.Text = "Setting Bunga"
         '
         'HutangToolStripMenuItem
         '
-        Me.HutangToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HutangBaruToolStripMenuItem, Me.ReviewHutangToolStripMenuItem})
+        Me.HutangToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HutangBaruToolStripMenuItem})
         Me.HutangToolStripMenuItem.Name = "HutangToolStripMenuItem"
         Me.HutangToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
         Me.HutangToolStripMenuItem.Text = "Hutang"
@@ -89,18 +94,6 @@ Partial Class main
         Me.HutangBaruToolStripMenuItem.Name = "HutangBaruToolStripMenuItem"
         Me.HutangBaruToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.HutangBaruToolStripMenuItem.Text = "Pinjaman"
-        '
-        'SettingBungaToolStripMenuItem
-        '
-        Me.SettingBungaToolStripMenuItem.Name = "SettingBungaToolStripMenuItem"
-        Me.SettingBungaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.SettingBungaToolStripMenuItem.Text = "Setting Bunga"
-        '
-        'ReviewHutangToolStripMenuItem
-        '
-        Me.ReviewHutangToolStripMenuItem.Name = "ReviewHutangToolStripMenuItem"
-        Me.ReviewHutangToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ReviewHutangToolStripMenuItem.Text = "Review Hutang"
         '
         'GroupBox1
         '
@@ -190,16 +183,16 @@ Partial Class main
         '
         'chartBestCredit
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.chartBestCredit.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.chartBestCredit.Legends.Add(Legend4)
+        ChartArea1.Name = "ChartArea1"
+        Me.chartBestCredit.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.chartBestCredit.Legends.Add(Legend1)
         Me.chartBestCredit.Location = New System.Drawing.Point(6, 19)
         Me.chartBestCredit.Name = "chartBestCredit"
-        Series4.ChartArea = "ChartArea1"
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Me.chartBestCredit.Series.Add(Series4)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.chartBestCredit.Series.Add(Series1)
         Me.chartBestCredit.Size = New System.Drawing.Size(749, 192)
         Me.chartBestCredit.TabIndex = 5
         Me.chartBestCredit.Text = "Chart1"
@@ -233,7 +226,6 @@ Partial Class main
     Friend WithEvents HutangToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HutangBaruToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SettingBungaToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReviewHutangToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents lbl_total_dpinjam As Label
     Friend WithEvents label_perkiraan As Label
