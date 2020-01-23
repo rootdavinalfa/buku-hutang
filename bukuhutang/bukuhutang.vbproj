@@ -92,6 +92,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="libs\datee.vb" />
     <Compile Include="libs\utility.vb" />
     <Compile Include="main.vb">
       <SubType>Form</SubType>

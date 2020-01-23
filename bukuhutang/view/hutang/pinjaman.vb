@@ -5,11 +5,13 @@ Public Class pinjaman
     Dim con As OleDb.OleDbConnection
     Dim interest, growedInterest, yangDihutangin, saldo, totalHutang As Double
     Dim util As utility
+    Dim datee As New datee
     Dim ktp, idPeminjam As String
 
     Private Sub pinjaman_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         con = connect()
         util = New utility(con)
+        oneSec.Start()
     End Sub
     Private Sub clearAll()
         interest = 0
@@ -28,8 +30,10 @@ Public Class pinjaman
         Console.WriteLine(TabControl1.SelectedIndex)
         If TabControl1.SelectedIndex = 2 Then
             refreshTabDataHutang()
-        ElseIf TabControl1.SelectedIndex = 1 Then
+        ElseIf TabControl1.SelectedIndex = 0 Then
             clearAll()
+        ElseIf TabControl1.SelectedIndex = 1 Then
+            refreshBayarHutang()
         End If
     End Sub
 
@@ -227,7 +231,7 @@ WHERE (((peminjam.idPenghutang)=@1) OR ((peminjam.noKTP)=@2) OR ((detailHutang.i
                 row.DefaultCellStyle.ForeColor = Color.White
                 row.DefaultCellStyle.BackColor = Color.Red
                 'Jika sudah lunas maka berwarna hijau
-            ElseIf row.Cells("statusHutang").Value = "Sudah Lunas" Then
+            ElseIf row.Cells("statusHutang").Value = "Lunas" Then
                 row.DefaultCellStyle.ForeColor = Color.White
                 row.DefaultCellStyle.BackColor = Color.Green
             End If
@@ -293,6 +297,187 @@ WHERE (((peminjam.idPenghutang)=@1) OR ((peminjam.noKTP)=@2) OR ((detailHutang.i
                     MsgBox("Success Deleted! dengan ID Hutang " + dgvDataHutang.CurrentRow.Cells(4).Value)
                     clearAll()
                     refreshTabDataHutang()
+                End If
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+
+    'ALL Function FOR tabpage 1 "Bayar Hutang"
+    Dim idHutang, idPem, namas, KTPs, statusPembayaran, statusLunas, tanggalTransaksi, tanggalHarusLunas As String
+    Dim totalTagihan, totalBunga, bungaBase, extraBunga, nominalPinjam, sisaHutang, bungs As Double
+
+    Private Sub oneSec_Tick(sender As Object, e As EventArgs) Handles oneSec.Tick
+        lblTimeNow.Text = Now
+    End Sub
+
+    Private Sub refreshBayarHutang()
+        inputBayar.Enabled = False
+        btnBayar.Enabled = False
+        inputBayarIDH.Text = ""
+        inputBayarNama.Text = ""
+        inputBayarIDKTP.Text = ""
+        inputBayar.Text = ""
+        lblBayarTglHrsLunas.Text = ""
+        lblBayarTglTransaksi.Text = ""
+        lblStatusLunas.Text = ""
+        lblStatusPembayaran.Text = ""
+        lblBayarNominal.Text = ""
+        lblBungaBase.Text = ""
+        lblExtraBunga.Text = ""
+        lblTotalBunga.Text = ""
+        lblTotalTagihan.Text = ""
+
+    End Sub
+
+    Private Sub btnBayar_Click(sender As Object, e As EventArgs) Handles btnBayar.Click
+        Dim inputBy = Convert.ToDouble(inputBayar.Text)
+        If totalTagihan < inputBy Then
+            MsgBox("Tidak diperkenankan membayar lebih dari yang ditagihkan!")
+        End If
+        Try
+            Dim idc = util.makeIDCicilan
+            Dim insertCicil = "INSERT INTO detailCicilan(idCicilan,idHutang,nominal,tanggalCicilan) VALUES(@1,@2,@3,@4)"
+            Dim ole = con.CreateCommand
+            ole.CommandText = insertCicil
+            ole.Parameters.Add(New OleDb.OleDbParameter("@1", idc))
+            ole.Parameters.Add(New OleDb.OleDbParameter("@2", idHutang))
+            ole.Parameters.Add(New OleDb.OleDbParameter("@3", inputBy))
+            ole.Parameters.Add(New OleDb.OleDbParameter("@4", Now.ToShortDateString))
+            If ole.ExecuteNonQuery Then
+                getSaldo()
+                ole = con.CreateCommand
+                Dim sqlS = "SELECT totalHutang FROM peminjam WHERE idPenghutang = @1"
+                ole.CommandText = sqlS
+                ole.Parameters.Add(New OleDb.OleDbParameter("@1", idPem))
+                Dim reader = ole.ExecuteReader
+                If reader.Read Then
+                    Dim lastTotH = Convert.ToDouble(reader(0)) - inputBy
+                    updateSaldos(idHutang, saldo, yangDihutangin, inputBy, lastTotH)
+                End If
+
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub inputBayarIDH_KeyDown(sender As Object, e As KeyEventArgs) Handles inputBayarIDH.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            idHutang = inputBayarIDH.Text
+            getSaldo()
+            getDetailHutang()
+        End If
+    End Sub
+
+    Private Sub getDetailHutang()
+        Try
+            Dim detailHut = "SELECT statusHutang,nominalHutang,sisaHutang,idPenghutang,tanggalTransaksi,tanggalHarusLunas,interest FROM detailHutang WHERE idHutang =@1"
+            Dim ole = con.CreateCommand
+            ole.CommandText = detailHut
+            ole.Parameters.Add(New OleDb.OleDbParameter("@1", idHutang))
+            Dim reader = ole.ExecuteReader
+            If reader.Read Then
+                statusLunas = reader(0)
+                nominalPinjam = Convert.ToDouble(reader(1))
+                sisaHutang = Convert.ToDouble(reader(2))
+                idPem = reader(3)
+                tanggalTransaksi = reader(4)
+                tanggalHarusLunas = reader(5)
+                bungaBase = Convert.ToDouble(reader(6))
+                getPeminjam()
+            Else
+                refreshBayarHutang()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Private Sub getPeminjam()
+        Try
+            Dim peminjamS = "SELECT namaPenghutang,noKTP,totalHutang FROM peminjam WHERE idPenghutang =@1"
+            Dim ole = con.CreateCommand
+            ole.CommandText = peminjamS
+            ole.Parameters.Add(New OleDb.OleDbParameter("@1", idPem))
+            Dim reader = ole.ExecuteReader
+            If reader.Read Then
+                namas = reader(0)
+                KTPs = reader(1)
+                totalHutang = reader(2)
+                inputBayarNama.Text = namas
+                inputBayarIDKTP.Text = String.Format("{0} / {1}", idPem, KTPs)
+                lblBayarTglTransaksi.Text = tanggalTransaksi
+                lblBayarTglHrsLunas.Text = tanggalHarusLunas
+                lblStatusLunas.Text = statusLunas
+                lblBayarNominal.Text = nominalPinjam.ToString("C", Globalization.CultureInfo.CreateSpecificCulture("id-ID"))
+                lblBungaBase.Text = String.Format("{0}%", bungaBase)
+                lblExtraBunga.Text = String.Format("{0}%", growedInterest)
+                lblBayarSisa.Text = sisaHutang.ToString("C", Globalization.CultureInfo.CreateSpecificCulture("id-ID"))
+                If datee.IsDateAfter(Now.ToShortDateString, tanggalHarusLunas) Then
+                    lblStatusPembayaran.Text = "TELAT BAYAR"
+                Else
+                    lblStatusPembayaran.Text = "TEPAT WAKTU"
+                End If
+                Dim extraBung = growedInterest * datee.Countdifferent2date(tanggalHarusLunas, Now.ToShortDateString)
+                If extraBung > 0 Then
+                    totalBunga = extraBung + bungaBase
+                Else
+                    totalBunga = bungaBase
+                End If
+                bungs = totalBunga / 100 * sisaHutang
+                Dim toBung = String.Format("{0}% / {1}", totalBunga, bungs.ToString("C", Globalization.CultureInfo.CreateSpecificCulture("id-ID")))
+                lblTotalBunga.Text = toBung
+                totalTagihan = sisaHutang + bungs
+                lblTotalTagihan.Text = totalTagihan.ToString("C", Globalization.CultureInfo.CreateSpecificCulture("id-ID"))
+                inputBayar.Enabled = True
+                btnBayar.Enabled = True
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub updateSaldos(idHutang As String, saldo As Double, yangDihutangin As Double, nominal As Double, lastTotH As Double)
+        Try
+            Dim saldoSQL = "UPDATE vault set balance = @1 , yangDihutangin = @2"
+            Dim ole = con.CreateCommand
+            ole.CommandText = saldoSQL
+            Dim blanceAkhir = saldo + nominal
+            Dim ygDihutanAkhir = yangDihutangin - nominal + bungs
+            ole.Parameters.Add(New OleDb.OleDbParameter("@1", blanceAkhir))
+            ole.Parameters.Add(New OleDb.OleDbParameter("@2", ygDihutanAkhir))
+            If ole.ExecuteNonQuery Then
+                ole = con.CreateCommand
+                saldoSQL = "UPDATE peminjam SET totalHutang = @1 WHERE idPenghutang = @2"
+                ole.CommandText = saldoSQL
+                ole.Parameters.Add(New OleDb.OleDbParameter("@1", lastTotH + bungs))
+                ole.Parameters.Add(New OleDb.OleDbParameter("@2", idPem))
+                If ole.ExecuteNonQuery Then
+                    ole = con.CreateCommand
+                    If nominal >= sisaHutang Then
+                        saldoSQL = "UPDATE detailHutang SET sisaHutang = @1 , statusHutang = @2,tanggalLunas = @3 WHERE idHutang = @4"
+                        ole.Parameters.Add(New OleDb.OleDbParameter("@1", sisaHutang - nominal + bungs))
+                        ole.Parameters.Add(New OleDb.OleDbParameter("@2", "Lunas"))
+                        ole.Parameters.Add(New OleDb.OleDbParameter("@3", Now.ToShortDateString))
+                        ole.Parameters.Add(New OleDb.OleDbParameter("@4", idHutang))
+
+                    ElseIf nominal < sisaHutang Then
+                        saldoSQL = "UPDATE detailHutang SET sisaHutang = @1 WHERE idHutang = @2"
+                        ole.Parameters.Add(New OleDb.OleDbParameter("@1", sisaHutang - nominal + bungs))
+                        ole.Parameters.Add(New OleDb.OleDbParameter("@2", idHutang))
+                    End If
+
+                    ole.CommandText = saldoSQL
+
+                    If ole.ExecuteNonQuery Then
+                        MsgBox("Success Bayar! dengan ID Hutang " + idHutang)
+                        clearAll()
+                        refreshBayarHutang()
+                    End If
                 End If
             End If
 

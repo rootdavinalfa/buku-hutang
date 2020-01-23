@@ -34,7 +34,6 @@ Partial Class main
         Me.HutangBaruToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lbl_total_dpinjam = New System.Windows.Forms.Label()
-        Me.label_perkiraan = New System.Windows.Forms.Label()
         Me.lbl_saldo_now = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -101,7 +100,6 @@ Partial Class main
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.lbl_total_dpinjam)
-        Me.GroupBox1.Controls.Add(Me.label_perkiraan)
         Me.GroupBox1.Controls.Add(Me.lbl_saldo_now)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
@@ -122,16 +120,6 @@ Partial Class main
         Me.lbl_total_dpinjam.Size = New System.Drawing.Size(136, 20)
         Me.lbl_total_dpinjam.TabIndex = 14
         Me.lbl_total_dpinjam.Text = "Rp.1.000.000.000"
-        '
-        'label_perkiraan
-        '
-        Me.label_perkiraan.AutoSize = True
-        Me.label_perkiraan.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.label_perkiraan.Location = New System.Drawing.Point(550, 86)
-        Me.label_perkiraan.Name = "label_perkiraan"
-        Me.label_perkiraan.Size = New System.Drawing.Size(136, 20)
-        Me.label_perkiraan.TabIndex = 13
-        Me.label_perkiraan.Text = "Rp.1.000.000.000"
         '
         'lbl_saldo_now
         '
@@ -200,7 +188,7 @@ Partial Class main
         Me.chartBestCredit.Name = "chartBestCredit"
         Series1.ChartArea = "ChartArea1"
         Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
+        Series1.Name = "seriesOne"
         Me.chartBestCredit.Series.Add(Series1)
         Me.chartBestCredit.Size = New System.Drawing.Size(749, 192)
         Me.chartBestCredit.TabIndex = 5
@@ -237,11 +225,10 @@ Partial Class main
     Friend WithEvents SettingBungaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents lbl_total_dpinjam As Label
-    Friend WithEvents label_perkiraan As Label
     Friend WithEvents lbl_saldo_now As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents chartBestCredit As DataVisualization.Charting.Chart
+    Friend WithEvents Label2 As Label
 End Class
