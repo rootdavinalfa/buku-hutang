@@ -92,11 +92,14 @@ Partial Class main
         'HutangBaruToolStripMenuItem
         '
         Me.HutangBaruToolStripMenuItem.Name = "HutangBaruToolStripMenuItem"
-        Me.HutangBaruToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HutangBaruToolStripMenuItem.Size = New System.Drawing.Size(124, 22)
         Me.HutangBaruToolStripMenuItem.Text = "Pinjaman"
         '
         'GroupBox1
         '
+        Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.lbl_total_dpinjam)
         Me.GroupBox1.Controls.Add(Me.label_perkiraan)
         Me.GroupBox1.Controls.Add(Me.lbl_saldo_now)
@@ -173,6 +176,9 @@ Partial Class main
         '
         'GroupBox2
         '
+        Me.GroupBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.chartBestCredit)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 223)
         Me.GroupBox2.Name = "GroupBox2"
@@ -183,6 +189,9 @@ Partial Class main
         '
         'chartBestCredit
         '
+        Me.chartBestCredit.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         ChartArea1.Name = "ChartArea1"
         Me.chartBestCredit.ChartAreas.Add(ChartArea1)
         Legend1.Name = "Legend1"

@@ -21,7 +21,7 @@
 
     Private Sub danaDipinjam()
         Try
-            Dim sqlDipinjam = "SELECT vault.yangDihutangin
+            Dim sqlDipinjam = "SELECT vault.yangDihutangin,vault.balance,vault.interest,vault.extraInterest
                                 FROM vault;
                                 "
             Dim ole As OleDb.OleDbCommand = con.CreateCommand
@@ -30,7 +30,12 @@
             If reader.Read Then
                 Console.WriteLine(reader(0).ToString)
                 Dim pjm = Convert.ToDouble(reader(0))
+                Dim sald = Convert.ToDouble(reader(1))
+                Dim lbl2 = String.Format("Perkiraan Keuntungan dari bunga {0}% 
+Dengan pertumbuhan {1}% jika tidak lunas saat jatuh tempo!", reader(2), reader(3))
+                Label2.Text = lbl2
                 lbl_total_dpinjam.Text = pjm.ToString("C", Globalization.CultureInfo.CreateSpecificCulture("id-ID"))
+                lbl_saldo_now.Text = sald.ToString("C", Globalization.CultureInfo.CreateSpecificCulture("id-ID"))
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -43,10 +48,7 @@
             MsgBox(ex.Message)
         End Try
     End Sub
-    Private Sub saldoSaatIni()
-
-    End Sub
-    Private Sub besarHutang()
+    Private Sub TigasbesarHutang()
 
     End Sub
 End Class

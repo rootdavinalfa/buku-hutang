@@ -1,4 +1,9 @@
-﻿Public Class utility
+﻿'Copyright 2020,Davin Alfarizky Putra Basudewa
+'https://dvnlabs.ml
+'Educational Purposes Only
+'Custom ID Generator for this project
+'By Davin Alfarizky Putra Basudewa
+Public Class utility
     Dim con As OleDb.OleDbConnection
     Public Sub New(cons As OleDb.OleDbConnection)
         con = cons
@@ -75,11 +80,11 @@
 
 
     Private Function make2DYear() As String
-        Return DateTime.Now.ToString("yy")
+        Return Now.ToString("yy")
     End Function
 
     Private Function make2DMonth() As String
-        Return DateTime.Now.ToString("MM")
+        Return Now.ToString("MM")
     End Function
     Private Function randomNum() As String
         Dim random = New System.Random

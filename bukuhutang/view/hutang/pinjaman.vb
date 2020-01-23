@@ -1,4 +1,7 @@
-﻿Public Class pinjaman
+﻿'Copyright 2020,Davin Alfarizky Putra Basudewa
+'https://dvnlabs.ml
+'Educational Purposes Only
+Public Class pinjaman
     Dim con As OleDb.OleDbConnection
     Dim interest, growedInterest, yangDihutangin, saldo, totalHutang As Double
     Dim util As utility
@@ -25,6 +28,8 @@
         Console.WriteLine(TabControl1.SelectedIndex)
         If TabControl1.SelectedIndex = 2 Then
             refreshTabDataHutang()
+        ElseIf TabControl1.SelectedIndex = 1 Then
+            clearAll()
         End If
     End Sub
 
@@ -231,5 +236,68 @@ WHERE (((peminjam.idPenghutang)=@1) OR ((peminjam.noKTP)=@2) OR ((detailHutang.i
 
     Private Sub btnShow_Click(sender As Object, e As EventArgs) Handles btnShow.Click
         refreshDGVDataHutang()
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Try
+            Dim statusH = dgvDataHutang.CurrentRow.Cells(5).Value.ToString
+            idPeminjam = dgvDataHutang.CurrentRow.Cells(0).Value.ToString
+            Dim idH = dgvDataHutang.CurrentRow.Cells(4).Value.ToString
+            Dim nominal = Double.Parse(dgvDataHutang.CurrentRow.Cells(6).Value, Globalization.NumberStyles.Currency, Globalization.CultureInfo.CreateSpecificCulture("id-ID"))
+
+            If statusH = "Belum Lunas" Then
+                Console.WriteLine("OOOO")
+                Dim sqlS = "DELETE FROM detailHutang WHERE idHutang =@1 AND idPenghutang = @2"
+                Dim ole = con.CreateCommand
+                ole.CommandText = sqlS
+                ole.Parameters.Add(New OleDb.OleDbParameter("@1", idH))
+                ole.Parameters.Add(New OleDb.OleDbParameter("@2", idPeminjam))
+                If ole.ExecuteNonQuery Then
+                    getSaldo()
+                    ole = con.CreateCommand
+                    sqlS = "SELECT totalHutang FROM peminjam WHERE idPenghutang = @1"
+                    ole.CommandText = sqlS
+                    ole.Parameters.Add(New OleDb.OleDbParameter("@1", idPeminjam))
+                    Dim reader = ole.ExecuteReader
+                    If reader.Read Then
+                        Dim lastTotH = Convert.ToDouble(reader(0)) - nominal
+                        updateSaldoDataHutang(saldo, yangDihutangin, nominal, lastTotH)
+
+                    End If
+                End If
+            Else
+                MessageBox.Show("Action Forbidden!", "Dilarang menghapus data yang sudah lunas!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub updateSaldoDataHutang(saldo As Double, yangDihutangin As Double, nominal As Double, lastTotH As Double)
+        Try
+            Dim saldoSQL = "UPDATE vault set balance = @1 , yangDihutangin = @2"
+            Dim ole = con.CreateCommand
+            ole.CommandText = saldoSQL
+            Dim blanceAkhir = saldo + nominal
+            Dim ygDihutanAkhir = yangDihutangin - nominal
+            ole.Parameters.Add(New OleDb.OleDbParameter("@1", blanceAkhir))
+            ole.Parameters.Add(New OleDb.OleDbParameter("@2", ygDihutanAkhir))
+            If ole.ExecuteNonQuery Then
+                ole = con.CreateCommand
+                saldoSQL = "UPDATE peminjam SET totalHutang = @1 WHERE idPenghutang = @2"
+                ole.CommandText = saldoSQL
+                ole.Parameters.Add(New OleDb.OleDbParameter("@1", lastTotH))
+                ole.Parameters.Add(New OleDb.OleDbParameter("@2", idPeminjam))
+                If ole.ExecuteNonQuery Then
+                    MsgBox("Success Deleted! dengan ID Hutang " + dgvDataHutang.CurrentRow.Cells(4).Value)
+                    clearAll()
+                    refreshTabDataHutang()
+                End If
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class

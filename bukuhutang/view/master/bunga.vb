@@ -1,4 +1,7 @@
-﻿Public Class bunga
+﻿'Copyright 2020,Davin Alfarizky Putra Basudewa
+'https://dvnlabs.ml
+'Educational Purposes Only
+Public Class bunga
     Dim con As OleDb.OleDbConnection
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try

@@ -51,19 +51,19 @@ Partial Class bunga
         '
         Me.inputBungaAwal.Location = New System.Drawing.Point(12, 29)
         Me.inputBungaAwal.Name = "inputBungaAwal"
-        Me.inputBungaAwal.Size = New System.Drawing.Size(187, 20)
+        Me.inputBungaAwal.Size = New System.Drawing.Size(278, 20)
         Me.inputBungaAwal.TabIndex = 2
         '
         'inputPertumbuhanBunga
         '
         Me.inputPertumbuhanBunga.Location = New System.Drawing.Point(12, 93)
         Me.inputPertumbuhanBunga.Name = "inputPertumbuhanBunga"
-        Me.inputPertumbuhanBunga.Size = New System.Drawing.Size(187, 20)
+        Me.inputPertumbuhanBunga.Size = New System.Drawing.Size(278, 20)
         Me.inputPertumbuhanBunga.TabIndex = 3
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(124, 135)
+        Me.btnSave.Location = New System.Drawing.Point(215, 136)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 4
@@ -74,7 +74,7 @@ Partial Class bunga
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(218, 184)
+        Me.ClientSize = New System.Drawing.Size(302, 184)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.inputPertumbuhanBunga)
         Me.Controls.Add(Me.inputBungaAwal)

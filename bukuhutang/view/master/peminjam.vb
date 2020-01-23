@@ -1,4 +1,7 @@
-﻿Public Class peminjam
+﻿'Copyright 2020,Davin Alfarizky Putra Basudewa
+'https://dvnlabs.ml
+'Educational Purposes Only
+Public Class peminjam
     Dim con As OleDb.OleDbConnection
     Dim util As utility
     Private Sub peminjam_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -1,4 +1,8 @@
-﻿Module dbs
+﻿'Copyright 2020,Davin Alfarizky Putra Basudewa
+'https://dvnlabs.ml
+'Educational Purposes Only
+'Global database connection!
+Module dbs
     Public Function connect() As OleDb.OleDbConnection
         Try
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection With {
